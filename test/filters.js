@@ -261,10 +261,10 @@ exports.testFilters = function() {
         // Timezone name
         // how to? 'date06': ['{{ d|date:"e" }}', {'d': new Date(2009, 3, 12, tzinfo=FixedOffset(30))}, '+0030'],
         'date07': ['{{ d|date:"e" }}', {'d': new Date(2009, 3, 12)}, ''],
-        'date08': ['{{ d|date:"dd.MM.yyyy" }}', {'d': 0}, '01.01.1970'],
+        'date08': ['{{ d|date:"dd.MM.yyyy" }}', {'d': new Date(1970, 0, 1).getTime()}, '01.01.1970'],
         'date09': ['{{ d|date:"dd.MM.yyyy" }}', {'d': 1393235825110}, '24.02.2014'],
         'date10': ['{{ d|date:"dd.MM.yyyy" }}', {'d': new java.util.Date(1393235825110)}, '24.02.2014'],
-        'date11': ['{{ d|date:"dd.MM.yyyy" }}', {'d': '2010-08-06'}, '06.08.2010'],
+        'date11': ['{{ d|date:"dd.MM.yyyy" }}', {'d': 'August 6, 2010 12:00:00 UTC'}, '06.08.2010'],
         'filter-first01': ['{{ a|first }} {{ b|first }}', {"a": ["a&b", "x"], "b": [markSafe("a&b"), "x"]}, "a&amp;b a&b"],
         'filter-first02': ['{% autoescape off %}{{ a|first }} {{ b|first }}{% endautoescape %}', {"a": ["a&b", "x"], "b": [markSafe("a&b"), "x"]}, "a&b a&b"],
 
