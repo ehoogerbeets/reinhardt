@@ -3,6 +3,7 @@ var assert = require("assert");
 var {Context} = require('../lib/context');
 var {Environment} = require('../lib/environment');
 var {Template} = require("../lib/template");
+var {TemplateSyntaxError} = require('../lib/errors');
 var ilib = require("../../ilib");
 var ResBundle = require("../../ilib/lib/ResBundle.js");
 
@@ -79,93 +80,47 @@ exports.testTransWithVariable = function() {
 };
 
 exports.testTransMissingQuotes = function() {
-   try {
-	   var x = env.getTemplate('page11.html').render(c);
-	   assert.equal(true, false);
-   } catch (e) {
-	   // success because it is supposed to throw an exception
-   }
+	assert.throws(function () { env.getTemplate('page11.html').render(c) }, TemplateSyntaxError);
 };
 
 exports.testTransMismatchedQuotes = function() {
-	try {
-		var x = env.getTemplate('page12.html').render(c);
-		assert.equal(true, false);
-	} catch (e) {
-		// success because it is supposed to throw an exception
-	}
+	assert.throws(function () { env.getTemplate('page12.html').render(c) }, TemplateSyntaxError);
 };
 
 exports.testTransMissingKey = function() {
-	try {
-		var x = env.getTemplate('page13.html').render(c);
-		assert.equal(true, false);
-	} catch (e) {
-		// success because it is supposed to throw an exception
-	}
+	assert.throws(function () { env.getTemplate('page13.html').render(c) }, TemplateSyntaxError);
 };
 
 exports.testTransMissingComment = function() {
-	try {
-		var x = env.getTemplate('page14.html').render(c);
-		assert.equal(true, false);
-	} catch (e) {
-		// success because it is supposed to throw an exception
-	}
+	assert.throws(function () { env.getTemplate('page14.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testTransKeyIsMissingQuotes = function() {
-	try {
-		var x = env.getTemplate('page15.html').render(c);
-		assert.equal(true, false);
-	} catch (e) {
-		// success because it is supposed to throw an exception
-	}
+	assert.throws(function () { env.getTemplate('page15.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testTransMissingSourceString = function() {
-	try {
-		var x = env.getTemplate('page16.html').render(c);
-		assert.equal(true, false);
-	} catch (e) {
-		// success because it is supposed to throw an exception
-	}
+	assert.throws(function () { env.getTemplate('page16.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testBlockTransNoEndBlockTrans = function() {
-	try {
-		var x = env.getTemplate('page17.html').render(c);
-		assert.equal(true, false);
-	} catch (e) {
-		// success because it is supposed to throw an exception
-	}
+	assert.throws(function () { env.getTemplate('page17.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testBlockTransMissingComment = function() {
-	try {
-		var x = env.getTemplate('page18.html').render(c);
-		assert.equal(true, false);
-	} catch (e) {
-		// success because it is supposed to throw an exception
-	}
+	assert.throws(function () { env.getTemplate('page18.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testBlockTransMissingKey = function() {
-	try {
-		var x = env.getTemplate('page19.html').render(c);
-		assert.equal(true, false);
-	} catch (e) {
-		// success because it is supposed to throw an exception
-	}
+	assert.throws(function () { env.getTemplate('page19.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testBlockTransMissingQuotesOnKey = function() {
-	try {
-		var x = env.getTemplate('page20.html').render(c);
-		assert.equal(true, false);
-	} catch (e) {
-		// success because it is supposed to throw an exception
-	}
+	assert.throws(function () { env.getTemplate('page20.html').render(c); }, TemplateSyntaxError);
+};
+
+exports.testBlockTransSubtagsNotAllowed = function() {
+	assert.throws(function () { env.getTemplate('page21.html').render(c); }, TemplateSyntaxError);
 };
 
 //start the test runner if we're called directly from command line
