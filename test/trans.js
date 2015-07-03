@@ -14,16 +14,16 @@ var env = new Environment({loader: fsLoader});
 // console.log("environment: resourcesDir is " + env.resourcesDir);
 // if the environment is debug, use the psuedo-translation locale for testing
 var rb = new ResBundle({
-	locale: "de-DE",
-	type: "html",
-	loadParams: {
-		base: env.resourcesDir
-	}
+   locale: "de-DE",
+   type: "html",
+   loadParams: {
+      base: env.resourcesDir
+   }
 });
 
 var c = {
    page: {
-	   name: "Test page"
+      name: "Test page"
    },
    variable: "Interpolated Variable",
    resBundle: rb
@@ -80,50 +80,50 @@ exports.testTransWithVariable = function() {
 };
 
 exports.testTransMissingQuotes = function() {
-	assert.throws(function () { env.getTemplate('page11.html').render(c) }, TemplateSyntaxError);
+   assert.throws(function () { env.getTemplate('page11.html').render(c) }, TemplateSyntaxError);
 };
 
 exports.testTransMismatchedQuotes = function() {
-	assert.throws(function () { env.getTemplate('page12.html').render(c) }, TemplateSyntaxError);
+   assert.throws(function () { env.getTemplate('page12.html').render(c) }, TemplateSyntaxError);
 };
 
 exports.testTransMissingKey = function() {
-	assert.throws(function () { env.getTemplate('page13.html').render(c) }, TemplateSyntaxError);
+   assert.throws(function () { env.getTemplate('page13.html').render(c) }, TemplateSyntaxError);
 };
 
 exports.testTransMissingComment = function() {
-	assert.throws(function () { env.getTemplate('page14.html').render(c); }, TemplateSyntaxError);
+   assert.throws(function () { env.getTemplate('page14.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testTransKeyIsMissingQuotes = function() {
-	assert.throws(function () { env.getTemplate('page15.html').render(c); }, TemplateSyntaxError);
+   assert.throws(function () { env.getTemplate('page15.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testTransMissingSourceString = function() {
-	assert.throws(function () { env.getTemplate('page16.html').render(c); }, TemplateSyntaxError);
+   assert.throws(function () { env.getTemplate('page16.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testBlockTransNoEndBlockTrans = function() {
-	assert.throws(function () { env.getTemplate('page17.html').render(c); }, TemplateSyntaxError);
+   assert.throws(function () { env.getTemplate('page17.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testBlockTransMissingComment = function() {
-	assert.throws(function () { env.getTemplate('page18.html').render(c); }, TemplateSyntaxError);
+   assert.throws(function () { env.getTemplate('page18.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testBlockTransMissingKey = function() {
-	assert.throws(function () { env.getTemplate('page19.html').render(c); }, TemplateSyntaxError);
+   assert.throws(function () { env.getTemplate('page19.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testBlockTransMissingQuotesOnKey = function() {
-	assert.throws(function () { env.getTemplate('page20.html').render(c); }, TemplateSyntaxError);
+   assert.throws(function () { env.getTemplate('page20.html').render(c); }, TemplateSyntaxError);
 };
 
 exports.testBlockTransSubtagsNotAllowed = function() {
-	assert.throws(function () { env.getTemplate('page21.html').render(c); }, TemplateSyntaxError);
+   assert.throws(function () { env.getTemplate('page21.html').render(c); }, TemplateSyntaxError);
 };
 
 //start the test runner if we're called directly from command line
 if (require.main == module.id) {
-    system.exit(require('test').run(exports, arguments[1]));
+   system.exit(require('test').run(exports, arguments[1]));
 }
