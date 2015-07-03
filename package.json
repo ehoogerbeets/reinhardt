@@ -8,8 +8,11 @@
             "web": "http://nekapuzer.at/",
             "email": "simon@nekapuzer.at"
         },
-    "contributors": [],
+    "contributors": [
+    	"Edwin Hoogerbeets"
+    ],
     "dependencies": {
+    	"ilib": ">=11.0.4"
     },
     "licenses": [{
         "type": "Apache License Version 2.0",
