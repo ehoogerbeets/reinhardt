@@ -4,21 +4,48 @@ var {Context} = require('../lib/context');
 var {Environment} = require('../lib/environment');
 var {Template} = require("../lib/template");
 var {TemplateSyntaxError} = require('../lib/errors');
-var ilib = require("../../ilib");
-var ResBundle = require("../../ilib/lib/ResBundle.js");
+
+var mockResourceStrings = {
+	"de-DE": {
+		"{{page.name}} - Base": "{{page.name}} - Basis",
+		"Source string.": "Ausgangssatz.",
+		"This is a trans tag with a source string and a translators comment": "Dies ist eine trans-Tag mit einem Ausgangssatz und einem Übersetzer Kommentar",
+		"unique_key": "Dies ist eine trans-Tag mit einem eindeutigen Schlüssel",
+		"unique_key_2": "Dies ist eine trans-Tag mit einem eindeutigen Schlüssel und Kommentar",
+		"This is a trans tag with a {{ variable }} thrown into the middle of it.": "Dies ist eine trans-Tag mit einem {{variable}} in die Mitte davon gesetzt.",
+		" This is text inside of a block trans tag. It is very long and treacherous and it spans multiple lines in the source. ": " Dies ist Text innerhalb eines trans-Blocks. Es ist sehr lang und tückisch und es spannt mehrere Zeilen in der Quelle über. ",
+		" This is the second block trans with multiple lines in the source and a renamed variable in it. Here is the page name: {{ foo }} ": " Dies ist der zweite trans-Block mit mehreren Linien in der Quelle und einem umbenannten Variable darin. Hier ist der Name der Seite: {{foo}} ",
+		" This is the third block trans with multiple lines in the source and a renamed variable in it and a translator's comment which should not appear here in the output. Here is the page name: {{ foo }} ": " Dies ist der dritte trans-Block mit mehreren Zeilen in der Quelle und eine umbenannte Variable drin und Kommentar des Übersetzers, die in der Ausgabe nicht hier erscheinen soll. Hier ist der Name der Seite: {{foo}} ",
+		" This is the fourth block trans with multiple lines in the source and a translator's comment which should not appear here in the output. ": " Dies ist der vierte trans-Block mit mehreren Zeilen in der Quelle und dem Kommentar des Übersetzers, die in der Ausgabe nicht erscheinen soll. ",
+		"unique_key_block": " Dies ist eine blocktrans Block mit einem eindeutigen Schlüssel. "
+	}	
+};
+
+var MockResources = function(locale) {
+	this.rb = mockResourceStrings[locale] || {};
+};
+MockResources.prototype.translate = function(source, key) {
+	var realkey = key || source;
+	return this.rb[realkey] || source;
+};
 
 var FsLoader = require('../lib/loaders/filesystem').Loader;
 var fsLoader = new FsLoader(module.resolve('./templatedir/trans/templates'));
-var env = new Environment({loader: fsLoader});
-
-// console.log("environment: resourcesDir is " + env.resourcesDir);
-// if the environment is debug, use the psuedo-translation locale for testing
-var rb = new ResBundle({
-   locale: "de-DE",
-   type: "html",
-   loadParams: {
-      base: env.resourcesDir
-   }
+var env = new Environment({
+	loader: fsLoader,
+	i18n: {
+		resBundleFactory: function(locale) {
+    		if (!this.cache) {
+    			this.cache = {};
+    		}
+    		if (!this.cache[locale]) {
+    			this.cache[locale] = new MockResources(locale);
+    		}
+    		// resources are immutable, so we don't have to worry about sharing them 
+    		// amongst sessions and threads
+    		return this.cache[locale];
+    	}
+	}
 });
 
 var c = {
@@ -26,7 +53,10 @@ var c = {
       name: "Test page"
    },
    variable: "Interpolated Variable",
-   resBundle: rb
+   // The locale may be different for each request, but in this 
+   // test, we'll just stick to German all the time.
+   locale: "de-DE",
+   rb: new MockResources("de-DE")
 };
 
 exports.testBlockTrans = function() {
@@ -125,5 +155,5 @@ exports.testBlockTransSubtagsNotAllowed = function() {
 
 //start the test runner if we're called directly from command line
 if (require.main == module.id) {
-   system.exit(require('test').run(exports, arguments[1]));
+	require('system').exit(require('test').run(exports, arguments[1]));
 }
