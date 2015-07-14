@@ -8,9 +8,9 @@
             "web": "http://nekapuzer.at/",
             "email": "simon@nekapuzer.at"
         },
-    "contributors": [],
-    "dependencies": {
-    },
+    "contributors": [
+    	"Edwin Hoogerbeets"
+    ],
     "licenses": [{
         "type": "Apache License Version 2.0",
         "url": "http://www.apache.org/licenses/"

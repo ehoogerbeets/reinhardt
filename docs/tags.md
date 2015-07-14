@@ -7,6 +7,7 @@ This document describes Reinhardt's built-in template tags.
 
 - [autoescape](#autoescape)
 - [block](#block)
+- [blocktrans](#blocktrans)
 - [comment](#comment)
 - [cycle](#cycle)
 - [extends](#extends)
@@ -21,6 +22,7 @@ This document describes Reinhardt's built-in template tags.
 - [include](#include)
 - [loadtag / loadfilter](#loadtag--loadfilter)
 - [spaceless](#spaceless)
+- [trans](#trans)
 - [verbatim](#verbatim)
 - [widthratio](#widthratio)
 - [with](#with)
@@ -52,6 +54,13 @@ block
 
 Defines a block that can be overridden by child templates. See
 the section "Template inheritance" in the [general template help](templates.md) for more information.
+
+
+blocktrans
+-----------
+
+Defines a block of text that is translated. See the document about [globalization in the Reinhardt 
+template language](i18n.md) for more information.
 
 comment
 ------
@@ -481,6 +490,12 @@ and ``bar`` will be loaded from ``somelibrary``:
 See [Custom tag and filter libraries](custom-template-tags.md) for
 more information.
 
+trans
+-----
+
+Defines a string that gets translated in the rendered output. See the 
+document about [globalization in the Reinhardt template language](i18n.md) 
+for more information.
 
 spaceless
 ------

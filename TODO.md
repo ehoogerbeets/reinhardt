@@ -25,6 +25,7 @@ Implemented filters and tags
     | Implemented |     Tag     |
     |      X      | autoescape  |
     |      X      | block       |
+    |      X      | blocktrans  |
     |      X      | comment     |
     |             | csrf_token  |
     |      X      | cycle       |
@@ -47,6 +48,7 @@ Implemented filters and tags
     |      X      | spaceless   |
     |             | ssi         |
     |             | templatetag |
+    |      X      | trans       |
     |     N/A     | url         |
     |      X      | verbatim    |
     |      X      | widthratio  |

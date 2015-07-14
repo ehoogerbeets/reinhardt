@@ -31,6 +31,7 @@ or CheetahTemplate, you should feel right at home with Reinhardt's templates.
 - [Accessing functions](#accessing-functions)
 - [Custom tag and filter libraries](#custom-tag-and-filter-libraries)
   - [Custom libraries and template inheritance](#custom-libraries-and-template-inheritance)
+- [Globalization Features](#globalization-features)
 
 Templates
 =========
@@ -601,3 +602,12 @@ access to the comments template tags and filters. The child template is
 responsible for its own ``{% load comments %}``.
 
 This is a feature for the sake of maintainability and sanity.
+
+Globalization Features
+=============
+
+Many web sites need to support multiple locales. Reinhardt templates support
+a way of translating the text of a template and customizing templates per
+locale. For a detailed description of the globalization features of the
+template language, see the [document](i18n.md) written about it.
+

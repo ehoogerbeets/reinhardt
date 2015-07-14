@@ -1,0 +1,6 @@
+{% blocktrans with foo=page.name comment "This is the translator's comment" %}
+This is the third block trans with multiple
+lines in the source and a renamed variable in it
+and a translator's comment which should not appear 
+here in the output. Here is the page name: {{foo}} 
+{% endblocktrans %}
